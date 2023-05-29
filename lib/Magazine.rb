@@ -11,4 +11,20 @@ class Magazine
     def self.all
         @@all
     end
+
+    def contributors
+        Article.all.select { |article| article.magazine == self }.map(&:author)
+      end
+    
+      def self.find_by_name(name)
+        @@all.find { |magazine| magazine.name == name }
+      end
+    
+      def article_titles
+        Article.all.select { |article| article.magazine == self }.map(&:title)
+      end
+    
+      def contributing_authors
+        contributors.group_by(&:itself).select { |_author, articles| articles.length > 2 }.keys
+      end
 end

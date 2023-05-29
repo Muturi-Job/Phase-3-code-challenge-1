@@ -6,7 +6,7 @@ class Author
     end
 
     def articles
-        @articles.dup
+        @articles.dup.freeze
     end
 
     def magazine
